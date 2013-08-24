@@ -1,0 +1,45 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="WPToReader.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
+            	<Run Text="WPToReader"/>
+            	<LineBreak/>
+            	<Run/>
+            </TextBlock>
+            <TextBlock Text="Settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Margin="12,165,12,23" Grid.RowSpan="2">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top"/>
+            <TextBox x:Name="UserName" HorizontalAlignment="Left" Height="72" Margin="0,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
+            <TextBlock HorizontalAlignment="Left" Margin="0,104,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top"/>
+            <PasswordBox x:Name="Password" HorizontalAlignment="Left" Margin="0,136,0,0" VerticalAlignment="Top" Width="456"/>
+            <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Margin="10,208,0,0" Click="onReset" VerticalAlignment="Top" Width="200"/>
+            <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="233,208,0,0" Click="onSave" VerticalAlignment="Top" Width="213"/>
+
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>
