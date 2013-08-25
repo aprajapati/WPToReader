@@ -48,10 +48,12 @@ namespace WPToReader
 
             ApplicationBar = new ApplicationBar();
 
+            ApplicationBar.Mode = ApplicationBarMode.Minimized;
             ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem("Settings");
             appBarMenuItem.Click += onSettings;
 
             ApplicationBar.MenuItems.Add(appBarMenuItem);
+            
         }
 
         private void onSettings(object sender, EventArgs e)
