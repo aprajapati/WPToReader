@@ -26,6 +26,9 @@ using Microsoft.Phone.Shell;
 using WPToReader.Resources;
 using System.IO;
 using System.Net.Http;
+using WPToReaderClassLib;
+using System.Data.Linq;
+using System.Data.Common;
 
 namespace WPToReader
 {
@@ -38,6 +41,15 @@ namespace WPToReader
 
             // Sample code to localize the ApplicationBar
             BuildLocalizedApplicationBar();
+
+            // Start background task is needed
+            
+            AppSettings appsettings = new AppSettings();
+            if (appsettings.BgTaskEnabled)
+            {
+                Settings settings = new Settings();
+                settings.StartWP2ReaderAgent();
+            }
         }
 
 
@@ -88,12 +100,44 @@ namespace WPToReader
             AppSettings settings = new AppSettings();
             String message = await SendToReaderAPI.sendDoc(settings.UserName, settings.Password, Url.Text, Author.Text, Title.Text, Text.Text);
 
-            // Inform user with appropriate message
-            MessageBox.Show(message, "Compose", MessageBoxButton.OK);
-
             if (message == "Operatoin successful!")
                 clearData();
+            else if( message.Substring(0, "Not Found".Length) == "Not Found" )
+            {
+                string url = message.Substring("Not Found:".Length);
+                try
+                {
+                    W2RTask task = new W2RTask();
+                    task._uri = url;
+
+
+                    TaskDataContext dataContext = new TaskDataContext(TaskDataContext.DBConnectionString);
+                    Table<W2RTask> table = dataContext.GetTable<W2RTask>();
+                    table.InsertOnSubmit(task);
+
+                    dataContext.SubmitChanges();
+                    message = "Document will be sent when phone connects to network";
+                    clearData();
+                }
+                catch (DbException exp)
+                {
+                    string strUniqueConstErr = "A duplicate value cannot be inserted into a unique index.";
+                    if (strUniqueConstErr == exp.Message.Substring(0, strUniqueConstErr.Length))
+                    {
+                        message = "This url is already queued";
+                        clearData();
+                    }
+                    else
+                        message = exp.Message;
+                }
+                
+               
+            }
+
+            // Inform user with appropriate message
+            MessageBox.Show(message, "Compose", MessageBoxButton.OK);            
         }
 
+        bool m_isBackgroundTaskEnabled = false;
     }
 }

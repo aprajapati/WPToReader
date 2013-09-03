@@ -1,30 +1,15 @@
-﻿/*
- * Copyright 2013-present InnocentDevil
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License. You may obtain
- * a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations
- * under the License.
- */
- 
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO.IsolatedStorage;
-using System.Diagnostics;
 
-namespace WPToReader
+namespace WPToReaderClassLib
 {
-    class AppSettings
+    public class AppSettings
     {
         // Our isolated storage settings
         IsolatedStorageSettings isolatedStore;
@@ -104,6 +89,7 @@ namespace WPToReader
 
         string UserNameKey = "UserName";
         string PasswordKey = "Password";
+        string BgTaskEnableKey = "BgTaskEnable";
         string defaultVal = "";
 
         /// <summary>
@@ -126,15 +112,43 @@ namespace WPToReader
         {
             get
             {
-                return GetValueOrDefault<string>(PasswordKey, defaultVal);
+                byte[] password = null;
+                password = GetValueOrDefault<byte[]>(PasswordKey, password);
+                if (null != password)
+                {
+                    byte[] passByte = ProtectedData.Unprotect(password, null);
+                    return Encoding.UTF8.GetString(passByte, 0, passByte.Length);
+                }
+                else
+                    return "";
             }
             set
             {
-                AddOrUpdateValue(PasswordKey, value);
+                byte[] byPass = Encoding.UTF8.GetBytes(value);
+                if (null != byPass)
+                {
+                    AddOrUpdateValue(PasswordKey, ProtectedData.Protect(byPass, null));
+                }
+                else
+                {
+                    AddOrUpdateValue(PasswordKey, byPass);
+                }
+                Save();
+            }
+        }
+
+        public bool BgTaskEnabled
+        {
+            get
+            {
+                return GetValueOrDefault<bool>(BgTaskEnableKey, false);
+            }
+            set
+            {
+                AddOrUpdateValue(BgTaskEnableKey, value);
                 Save();
             }
         }
 
     }
 }
-
