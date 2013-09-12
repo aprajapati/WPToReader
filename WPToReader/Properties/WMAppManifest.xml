@@ -5,7 +5,7 @@
     <Language code="en-US" />
   </Languages>
   <App xmlns="" ProductID="{10e63f8b-fc68-4f09-a493-22dab7e5684a}" Title="WPToReader" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="WPToReader author" Description="Sample description" Publisher="WPToReader" PublisherID="{4f56c8fb-f547-457b-bff5-304d7005056c}">
-    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+    <IconPath IsRelative="true" IsResource="false">SendToReaderICONAPP.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_SENSORS" />
@@ -20,9 +20,9 @@
     <Tokens>
       <PrimaryToken TokenID="WPToReaderToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">SendToReaderICON.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">SendToReaderICONMed.png</BackgroundImageURI>
           <Title>WPToReader</Title>
           <BackContent>
           </BackContent>

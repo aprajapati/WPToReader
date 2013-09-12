@@ -148,6 +148,9 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="SendToReaderICON.png" />
+    <Content Include="SendToReaderICONAPP.png" />
+    <Content Include="SendToReaderICONMed.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
