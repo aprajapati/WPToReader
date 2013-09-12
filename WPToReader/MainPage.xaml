@@ -56,11 +56,11 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,24,0">
             <TextBlock HorizontalAlignment="Left" Margin="0,1,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top"/>
-            <TextBox x:Name="Title" HorizontalAlignment="Left" Margin="0,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"/>
+            <TextBox x:Name="Title" HorizontalAlignment="Left" Margin="0,24,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="456"/>
             <TextBlock HorizontalAlignment="Left" Margin="0,85,0,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top"/>
-            <TextBox x:Name="Author" HorizontalAlignment="Left" Margin="0,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"/>
+            <TextBox x:Name="Author" HorizontalAlignment="Left" Margin="0,107,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="456"/>
             <TextBlock HorizontalAlignment="Left" Margin="0,169,0,0" TextWrapping="Wrap" Text="Url" VerticalAlignment="Top"/>
-            <TextBox x:Name="Url" HorizontalAlignment="Left" Margin="0,192,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456" InputScope="Url"/>
+            <TextBox x:Name="Url" HorizontalAlignment="Left" Margin="0,192,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="456" InputScope="Url"/>
             <TextBlock HorizontalAlignment="Left" Margin="0,253,0,0" TextWrapping="Wrap" Text="Text" VerticalAlignment="Top"/>
             <TextBox x:Name="Text" HorizontalAlignment="Left" Margin="0,280,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456" Height="139"/>
             <Button x:Name="Cancle" Content="Cancle" HorizontalAlignment="Left" Margin="0,408,0,0" VerticalAlignment="Top" Width="213" Click="onCancle"/>

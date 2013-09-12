@@ -90,6 +90,8 @@ namespace WPToReader
 
         private async void onClick(object sender, RoutedEventArgs e)
         {
+            Button save = (Button)sender;
+            save.IsEnabled = false;
             string data = "";
             if (Url.Text != "")
                 data += "url=" + Url.Text;
@@ -135,7 +137,8 @@ namespace WPToReader
             }
 
             // Inform user with appropriate message
-            MessageBox.Show(message, "Compose", MessageBoxButton.OK);            
+            MessageBox.Show(message, "Compose", MessageBoxButton.OK);
+            save.IsEnabled = true;
         }
 
         bool m_isBackgroundTaskEnabled = false;
