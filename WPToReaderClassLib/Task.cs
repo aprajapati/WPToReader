@@ -12,7 +12,7 @@ namespace WPToReaderClassLib
     public class W2RTask
     {
         private string uri;
-        private bool isDone;
+        private bool isDone = false;
         [Column( IsPrimaryKey = true, CanBeNull = false )]
         public string _uri
         {

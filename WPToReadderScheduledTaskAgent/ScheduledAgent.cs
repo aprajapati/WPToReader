@@ -45,68 +45,13 @@ namespace WPToReadderScheduledTaskAgent
         /// This method is called when a periodic or resource intensive task is invoked
         /// </remarks>
 
-        TaskDataContext dataContext = new TaskDataContext(TaskDataContext.DBConnectionString);
-
-        void RemoveSentDocs()
-        {
-            Table<W2RTask> table =  dataContext.GetTable<W2RTask>();
-
-            // Define query to gather all of the to-do items.
-            var toDoItemsInDB = from W2RTask task in dataContext.ToDoItems where task._isDone == true
-                                select task;
-
-            // Execute query and place results into a collection.
-            ObservableCollection<W2RTask>  sentDocuments = new ObservableCollection<W2RTask>(toDoItemsInDB);
-            
-            foreach (W2RTask tsk in sentDocuments)
-            {
-                table.DeleteOnSubmit(tsk);
-            }
-
-            dataContext.SubmitChanges();
-        }
-
-        async Task<bool> SendPendingDocs()
-        {
-            bool bRes = true;
-
-            Table<W2RTask> table = dataContext.GetTable<W2RTask>();
-
-            // Define query to gather all of the to-do items.
-            var toDoItemsInDB = from W2RTask task in dataContext.ToDoItems
-                                where task._isDone == false
-                                select task;
-
-            // Execute query and place results into a collection.
-            ObservableCollection<W2RTask> sentDocuments = new ObservableCollection<W2RTask>(toDoItemsInDB);
-
-            foreach (W2RTask tsk in sentDocuments)
-            {
-                string url = tsk._uri;
-                url = url.Trim(':');
-                string message = await SendToReaderAPI.postMessage(url, "BGTask");
-
-                if (message == "Operation successful!")
-                    tsk._isDone = true;
-                else if (message.Substring(0, "Not Found".Length) == "Not Found")
-                {
-                    bRes = false;
-                    break;
-                }
-
-            }
-
-            dataContext.SubmitChanges();
-
-            return bRes;
-        }
 
         protected override async void OnInvoke(ScheduledTask task)
         {
             //TODO: Add code to perform your task in background
 
-            RemoveSentDocs();
-            await SendPendingDocs();           
+            BgTaskHelper.RemoveSentDocs();
+            await BgTaskHelper.SendPendingDocs();
 
             // If debugging is enabled, launch the agent again in one minute.
 #if DEBUG_AGENT
@@ -119,9 +64,8 @@ namespace WPToReadderScheduledTaskAgent
             toast.Content = toastMessage;
             toast.Show();
 
-  
-#endif
             ScheduledActionService.LaunchForTest(task.Name, TimeSpan.FromSeconds(60));
+#endif            
             // Call NotifyComplete to let the system know the agent is done working.
             NotifyComplete();
 

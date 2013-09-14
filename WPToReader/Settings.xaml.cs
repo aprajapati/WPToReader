@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
- 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -111,9 +110,10 @@ namespace WPToReader
             {
                 ScheduledActionService.Add(periodicTask);
                 //PeriodicStackPanel.DataContext = periodicTask;
-
+#if DEBUG_AGENT
                 // If debugging is enabled, use LaunchForTest to launch the agent in one minute.
-    ScheduledActionService.LaunchForTest(periodicTaskName, TimeSpan.FromSeconds(60));
+                ScheduledActionService.LaunchForTest(periodicTaskName, TimeSpan.FromSeconds(60));
+#endif
             }
             catch (InvalidOperationException exception)
             {

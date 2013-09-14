@@ -86,7 +86,7 @@ namespace WPToReaderClassLib
             if (message == "Not Found")
             {
                 // Append url to status message
-                message += ":url=" + url;
+                message += ":" + url;
                 // Chcek if background task is enabled.
                 //if (backgroundTaskEnabled)
                 //{
