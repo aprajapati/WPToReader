@@ -42,14 +42,7 @@ namespace WPToReader
             // Sample code to localize the ApplicationBar
             BuildLocalizedApplicationBar();
 
-            // Start background task is needed
-            
-            AppSettings appsettings = new AppSettings();
-            if (appsettings.BgTaskEnabled)
-            {
-                Settings settings = new Settings();
-                settings.StartWP2ReaderAgent();
-            }
+            Settings setting = new Settings();            
         }
 
 

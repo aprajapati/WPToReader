@@ -46,26 +46,25 @@ namespace WPToReadderScheduledTaskAgent
         /// </remarks>
 
 
-        protected override async void OnInvoke(ScheduledTask task)
+        protected async override void OnInvoke(ScheduledTask task)
         {
             //TODO: Add code to perform your task in background
 
             BgTaskHelper.RemoveSentDocs();
-            await BgTaskHelper.SendPendingDocs();
+            await BgTaskHelper.SendPendingDocs();           
 
-            // If debugging is enabled, launch the agent again in one minute.
 #if DEBUG_AGENT
-            string toastMessage = "WP2Reader BG Task running";
+            // If debugging is enabled, launch the agent again in one minute.                 
 
+            string toastMessage = "WP2Reader BG Task running";      
             // Launch a toast to show that the agent is running.
             // The toast will not be shown if the foreground application is running.
             ShellToast toast = new ShellToast();
-            toast.Title = "Background Agent Sample";
+            toast.Title = "WPToReader";
             toast.Content = toastMessage;
             toast.Show();
-
             ScheduledActionService.LaunchForTest(task.Name, TimeSpan.FromSeconds(60));
-#endif            
+#endif
             // Call NotifyComplete to let the system know the agent is done working.
             NotifyComplete();
 

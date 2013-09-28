@@ -39,6 +39,7 @@
             <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Margin="10,284,0,0" Click="onReset" VerticalAlignment="Top" Width="200"/>
             <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="233,284,0,0" Click="onSave" VerticalAlignment="Top" Width="213"/>
             <CheckBox x:Name="BkGroundTaskEnable" Content="Enable Background Task" HorizontalAlignment="Left" Margin="10,207,0,0" VerticalAlignment="Top" Checked="BkGroundTaskEnable_Checked" Unchecked="BkGroundTaskEnable_Unchecked"/>
+            <TextBlock x:Name="Stats" HorizontalAlignment="Left" Height="204" Margin="0,356,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
 
         </Grid>
     </Grid>

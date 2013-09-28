@@ -41,7 +41,70 @@ namespace WPToReader
             AppSettings settings = new AppSettings();
             UserName.Text = settings.UserName;
             Password.Password = settings.Password;
+
+            periodicTask = ScheduledActionService.Find(periodicTaskName) as PeriodicTask;
+            if (periodicTask != null)
+            {
+                Stats.Text = "Stats\n";
+                Stats.Text += "BgTask is ";
+                Stats.Text +=  (periodicTask.IsEnabled) ? "Enabled" : "Disabled";
+                Stats.Text += "\n";
+                if( periodicTask.IsEnabled )
+                {
+                    Stats.Text += "Last Scheduled time ";
+                    Stats.Text += periodicTask.LastScheduledTime.ToString();
+                    Stats.Text += "\n";
+
+                    Stats.Text += "Is ";
+                    Stats.Text += (periodicTask.IsScheduled) ? "Scheduled" : "Not Scheduled";
+                    Stats.Text += " For next time\n";
+
+                    Stats.Text += "Expiration time is ";
+                    Stats.Text += periodicTask.ExpirationTime.ToString();
+                    Stats.Text += "\n";
+
+                    ignoreCheckBoxEvents = (periodicTask.IsScheduled && (periodicTask.ExpirationTime > DateTime.Now));
+
+                    Stats.Text += "Last Exit Reason ";
+                    switch(periodicTask.LastExitReason)
+                    {
+                        case AgentExitReason.Completed:
+                            Stats.Text += "Completed";
+                            break;
+                        case AgentExitReason.Aborted:
+                            Stats.Text += "Aborted";
+                            break;
+                        case AgentExitReason.ExecutionTimeExceeded:
+                            Stats.Text += "ExecutionTimeExceeded";
+                            break;
+                        case AgentExitReason.MemoryQuotaExceeded:
+                            Stats.Text += "MemoryQuotaExceeded";
+                            break;
+                        case AgentExitReason.None:
+                            Stats.Text += "None";
+                            break;
+                        case AgentExitReason.Other:
+                            Stats.Text += "Other";
+                            break;
+                        case AgentExitReason.Terminated:
+                            Stats.Text += "Terminated";
+                            break;
+                        case AgentExitReason.UnhandledException:
+                            Stats.Text += "UnhandledException";
+                            break;
+                        default:
+                            Stats.Text += "Unknown";
+                            break;
+                    }
+                    Stats.Text += "\n";                   
+                    
+                }
+ 
+            }
+
             BkGroundTaskEnable.IsChecked = settings.BgTaskEnabled;
+
+
         }
 
         private async void onSave(object sender, EventArgs e)

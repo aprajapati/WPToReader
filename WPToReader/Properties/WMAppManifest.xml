@@ -4,11 +4,10 @@
   <Languages xmlns="">
     <Language code="en-US" />
   </Languages>
-  <App xmlns="" ProductID="{10e63f8b-fc68-4f09-a493-22dab7e5684a}" Title="WPToReader" RuntimeType="Silverlight" Version="1.0.0.1" Genre="apps.normal" Author="WPToReader author" Description="Sample description" Publisher="WPToReader" PublisherID="{4f56c8fb-f547-457b-bff5-304d7005056c}">
+  <App xmlns="" ProductID="{10e63f8b-fc68-4f09-a493-22dab7e5684a}" Title="WPToReader" RuntimeType="Silverlight" Version="1.1.0.1" Genre="apps.normal" Author="WPToReader author" Description="Sample description" Publisher="WPToReader" PublisherID="{4f56c8fb-f547-457b-bff5-304d7005056c}">
     <IconPath IsRelative="true" IsResource="false">SendToReaderICONAPP.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
-      <Capability Name="ID_CAP_SENSORS" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
       <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
       <Capability Name="ID_CAP_IDENTITY_USER" />
